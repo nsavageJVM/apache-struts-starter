@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                                     http://xmlns.jcp.org/xml/ns/persistence/orm_2_0.xsd" version="2.1">
+
+    <!-- JPA Named Queries -->
+    <named-query name="User.login">
+        <query>SELECT  u from User u where u.email= :email</query>
+    </named-query>
+
+
+    <!-- entity mapping -->
+    <entity class="com.db.User"/>
+
+</entity-mappings>

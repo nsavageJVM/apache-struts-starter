@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="com.crypto" namespace="/crypto" extends="default">
+
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+
+        <interceptors>
+
+            <interceptor name="ajaxInterceptor"
+                         class="com.crypto.auth.AuthenticationInterceptor" />
+
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="ajaxInterceptor" />
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+
+        </interceptors>
+
+        <default-interceptor-ref name="authStack" />
+
+
+        <global-results>
+            <result name="login_redirect" type="tiles" >login</result>
+        </global-results>
+
+
+
+
+        <action name="login" method="input" class="com.crypto.login.Login" >
+            <result name="input" type="tiles">login</result>
+        </action>
+        <action name="do_login" class="com.crypto.login.Login" method="execute">
+            <!-- validation error  returns input -->
+            <result name="input" type="tiles">login</result>
+            <result name="success" type="redirectAction" >entry</result>
+        </action>
+
+        <action name="logout" method="logout" class="com.crypto.EntryPoint" >
+            <result name="success" type="tiles">login</result>
+        </action>
+
+        <action name="registration" class="com.crypto.login.Login"  method="input">
+            <result name="input" type="tiles" >registration</result>
+        </action>
+
+        <action name="register" class="com.crypto.login.Login"  method="register">
+            <result name="input" type="tiles">registration</result>
+            <result name="success" type="tiles">login</result>
+            <result name="error">error</result>
+        </action>
+
+        <action name="entry"  class="com.crypto.EntryPoint" method="setUpGui">
+            <result name="input" type="tiles">entrypoint</result>
+        </action>
+
+        <!-- cal views -->
+        <action name="cal_create"  class="com.crypto.cal.CrudCalAction" method="setUpGui">
+            <result name="input" type="tiles">createcal</result>
+        </action>
+
+        <action name="cal_view"  class="com.crypto.cal.CrudCalAction" method="setUpGui">
+            <result name="input" type="tiles">viewcal</result>
+        </action>
+
+    </package>
+</struts>

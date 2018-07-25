@@ -1,0 +1,86 @@
+// == buildscript ==
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+  
+
+    }
+}
+
+def baseVersion = "1.0.0"
+
+ext {
+ 
+}
+
+ 
+
+// == all projects ==
+allprojects {
+
+    ext {
+
+    }
+
+    group 'struts-dev'
+    version "1.0.0"
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+// == subprojects ==
+subprojects {
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+}
+
+// == client ==
+project(':client') {
+
+ 
+}
+
+// == server ==
+project(':server') {
+    apply plugin: 'war'
+
+
+    dependencies {
+
+    }
+
+    war {
+        baseName "crypto"
+        archiveName "${war.baseName}.war"
+        //   from("/build/webstart") {
+        //       into "webstart"
+        //   }
+    }
+
+}
+
+// https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html
+//task runSquirrel(type:Exec){
+//
+//    doFirst {
+//        println "Starting squirrel..."
+//        workingDir = './squirrel/'
+//        commandLine 'cmd', '/c', 'squirrel-sql.bat'
+//    }
+//}
+
+
+

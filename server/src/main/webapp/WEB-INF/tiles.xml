@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="baseLayout" template="/tiles/layout.jsp">
+        <put-attribute name="headerslot" value="/tiles/loginslot.jsp"/>
+        <put-attribute name="side-bar-top" value="/tiles/SideBarTop.jsp"/>
+        <put-attribute name="side-bar-dropdown" value="/tiles/SideBarDropdown.jsp"/>
+        <put-attribute name="body" value="/tiles/body.jsp"/>
+        <put-list-attribute name="stylesheets">
+            <add-attribute value="/css/normalize.css" />
+            <add-attribute value="/css/common.css" />
+        </put-list-attribute>
+    </definition>
+
+
+    <definition name="error" extends="baseLayout">
+        <put-attribute name="headerslot" value=""/>
+        <put-attribute name="side-bar-top" value=""/>
+        <put-attribute name="side-bar-dropdown" value=""  />
+        <put-attribute name="body" value="/error.jsp"/>
+    </definition>
+
+
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="headerslot" value="/com/crypto/auth/LoginHeader.jsp"/>
+        <put-attribute name="side-bar-top" value="/com/crypto/sidebar/LoggedOutSideBarTop.jsp"/>
+        <put-attribute name="side-bar-dropdown" value="/com/crypto/sidebar/LoggedOutSideBarDropdown.jsp"/>
+        <put-attribute name="body" value="/com/crypto/login/Login.jsp"/>
+    </definition>
+
+
+    <definition name="registration" extends="baseLayout">
+        <put-attribute name="headerslot" value=""/>
+        <put-attribute name="side-bar-top" value=""/>
+        <put-attribute name="side-bar-dropdown" value=""  />
+        <put-attribute name="body" value="/com/crypto/login/Registration.jsp"/>
+    </definition>
+
+
+    <definition name="entrypoint" extends="baseLayout">
+        <put-attribute name="headerslot" value="/com/crypto/auth/LoginHeader.jsp"/>
+        <put-attribute name="side-bar-top" value="/com/crypto/sidebar/LoggedInSideBarTop.jsp"/>
+        <put-attribute name="side-bar-dropdown" value="/com/crypto/sidebar/LoggedInSideBarDropdown.jsp"/>
+        <put-attribute name="body" value="/com/crypto/entry/Splash.jsp"/>
+    </definition>
+
+
+    <!-- cal -->
+
+    <definition name="createcal" extends="baseLayout">
+        <put-attribute name="headerslot" value="/com/crypto/auth/LoginHeader.jsp"/>
+        <put-attribute name="side-bar-top" value="/com/crypto/sidebar/LoggedInSideBarTop.jsp"/>
+        <put-attribute name="side-bar-dropdown" value="/com/crypto/sidebar/LoggedInSideBarDropdown.jsp"/>
+        <put-attribute name="body" value="/com/crypto/cal/CreateCal.jsp"/>
+    </definition>
+
+    <definition name="viewcal" extends="baseLayout">
+        <put-attribute name="headerslot" value="/com/crypto/auth/LoginHeader.jsp"/>
+        <put-attribute name="side-bar-top" value="/com/crypto/sidebar/LoggedInSideBarTop.jsp"/>
+        <put-attribute name="side-bar-dropdown" value="/com/crypto/sidebar/LoggedInSideBarDropdown.jsp"/>
+        <put-attribute name="body" value="/com/crypto/cal/CalView.jsp"/>
+    </definition>
+
+
+</tiles-definitions>

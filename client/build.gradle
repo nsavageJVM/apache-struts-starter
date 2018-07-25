@@ -1,0 +1,44 @@
+
+buildscript {
+    ext {
+
+    }
+    repositories {
+        mavenCentral()
+    }
+
+}
+
+
+
+
+apply plugin: 'application'
+
+mainClassName = 'com.crypto.Client'
+
+// tag::repositories[]
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.1.BUILD-SNAPSHOT'
+    implementation 'org.xerial:sqlite-jdbc:3.21.0.1'
+    implementation'commons-dbutils:commons-dbutils:1.7'
+
+
+}
+
+
+task "create-dirs" << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}

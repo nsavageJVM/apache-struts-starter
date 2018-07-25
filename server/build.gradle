@@ -1,0 +1,103 @@
+group 'strust-dev'
+version '1.0.0'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.gretty:gretty:+'
+
+
+    }
+}
+
+
+apply plugin: 'org.gretty'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+}
+
+
+dependencies {
+ 
+
+    implementation 'org.apache.struts:struts2-core:2.5.16'
+    implementation 'org.apache.struts:struts2-tiles-plugin:2.5.16'
+    implementation 'org.apache.struts:struts2-json-plugin:2.5.16'
+
+    implementation 'org.apache.logging.log4j:log4j-core:2.11.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.11.0'
+
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
+
+    implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.2'
+
+    implementation 'org.apache.commons:commons-collections4:4.2'
+
+
+    implementation 'org.xerial:sqlite-jdbc:3.23.1'
+
+    implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+    compileOnly 'org.projectlombok:lombok:1.18.0'
+
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    compileOnly 'javax.servlet:jsp-api:2.0'
+    implementation 'javax.servlet:jstl:1.2'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.apache.struts', name: 'struts2-junit-plugin', version: '2.5.16'
+    testImplementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.2'
+    testImplementation 'org.xerial:sqlite-jdbc:3.23.1'
+    testImplementation 'javax.servlet:jsp-api:2.0'
+    testImplementation 'org.apache.commons:commons-collections4:4.2'
+}
+
+
+gretty {
+    // supported values:
+    // 'jetty7', 'jetty8', 'jetty9', 'jetty93', 'jetty94', 'tomcat7', 'tomcat8'
+    servletContainer = 'tomcat8'
+    fastReload = true
+    contextPath = '/'
+
+}
+
+task  deployBundle (type: Copy ) {
+
+    File targetFolder = new File(project.rootDir, "react-dev/bundle.js" )
+    File deployFolder = new File(project.projectDir, "src/main/webapp/js" )
+
+    println("targetFolder = ${targetFolder.absolutePath}")
+    println("deployFolder = ${deployFolder.absolutePath}")
+
+    from targetFolder
+    into deployFolder
+
+
+}
+
+
+task  deployArtifact (type: Copy ) {
+
+    File targetFolder = new File(project.projectDir, "build/libs" )
+    File deployFolder = new File(project. rootDir, "tomcat/webapps" )
+
+    println("deployFolder = ${deployFolder.absolutePath}")
+    println("targetFolder = ${targetFolder.absolutePath}")
+
+    from targetFolder
+    into deployFolder
+
+
+    rename { filename ->
+        filename.replace 'crypto', 'server'
+    }
+
+}
